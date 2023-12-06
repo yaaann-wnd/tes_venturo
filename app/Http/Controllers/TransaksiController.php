@@ -9,9 +9,7 @@ class TransaksiController extends Controller
 {
     public function home()
     {
-        $tahun = null;
-
-        return view('transaksi', ['tahun' => $tahun]);
+        return view('transaksi', ['tahun' => null]);
     }
 
     public function transaksi(Request $request)
