@@ -23,7 +23,7 @@ class TransaksiController extends Controller
         $getMenu = Http::get('https://tes-web.landa.id/intermediate/menu');
         $getTransaksi = Http::get('https://tes-web.landa.id/intermediate/transaksi?tahun=' . $tahun);
 
-        // 
+        // mengubah format json menjadi array
         $getMenuJson = json_decode($getMenu);
         $getTransaksiJson = json_decode($getTransaksi);
 
@@ -31,14 +31,14 @@ class TransaksiController extends Controller
         $menuCollections = collect($getMenuJson);
         $transaksiCollections = collect($getTransaksiJson);
 
-        // 
+        // variabel untuk menampung menu dengan kategori makanan dan minuman
         $makananCollections = $menuCollections->where('kategori', 'makanan');
         $minumanCollections = $menuCollections->where('kategori', 'minuman');
 
         // variabel untuk menampung total keseluruhan dalam setahun
         $total = 0;
 
-        // kondisi jika variabel tahun telah diisi
+        // start kondisi jika variabel tahun telah diisi
         if ($tahun) {
 
             // start menghitung total menu perbulan
@@ -96,6 +96,7 @@ class TransaksiController extends Controller
                 'minumans' => $minumanCollections,
             ]);
         }
+        // end kondisi jika variabel tahun telah diisi
 
         return redirect()->route('home');
     }
